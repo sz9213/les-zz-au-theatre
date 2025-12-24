@@ -324,3 +324,91 @@ h1{ margin: 0 0 8px; font-size: clamp(1.6rem, 2.6vw, 2.3rem); letter-spacing: .2
   border-radius:50%;
   animation: snow linear infinite;
 }
+
+/* Bonus */
+.bonus-section{ margin: 18px 0 70px; padding-top: 10px; }
+.bonus-title{ margin: 0 0 14px; font-size: 1.2rem; }
+.bonus-grid{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px){ .bonus-grid{ grid-template-columns: 1fr; } }
+.bonus-card{
+  position: relative;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 22px;
+  background:
+    radial-gradient(420px 260px at 15% 20%, rgba(239,68,68,.16), transparent 60%),
+    radial-gradient(420px 260px at 85% 10%, rgba(34,197,94,.16), transparent 55%),
+    radial-gradient(520px 320px at 60% 95%, rgba(125,211,252,.14), transparent 60%),
+    rgba(18,26,36,.62);
+  box-shadow: 0 18px 45px rgba(0,0,0,.45);
+  overflow:hidden;
+  padding: 14px;
+}
+.bonus-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, rgba(255,255,255,.18), transparent 30%, rgba(255,255,255,.10));
+  opacity:.35;
+  pointer-events:none;
+}
+.bonus-card:hover{ transform: translateY(-3px); transition: transform .2s ease; }
+.bonus-inner{ display:flex; gap: 14px; align-items:center; }
+.bonus-img{
+  width: 92px; height: 92px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.20);
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+.bonus-meta h4{ margin: 0 0 4px; font-size: 1.05rem; }
+.bonus-meta p{ margin: 0; color: var(--muted); line-height: 1.35; }
+.scratch-card canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border-radius: 22px;
+  /* petit liseré pour bien voir la zone à gratter */
+  outline: 2px solid rgba(255,255,255,.14);
+  outline-offset: -10px;
+}
+.scratch-hint{
+  margin-top: 10px;
+  color: rgba(231,237,247,.85);
+  font-size: .95rem;
+}
+
+
+/* Masquage du cadeau bonus (révélé après grattage) */
+.scratch-card .bonus-inner{
+  opacity: 0;
+  filter: blur(14px);
+  transform: scale(.98);
+  transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+}
+.scratch-card.is-revealed .bonus-inner{
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+
+/* Fix GitHub Pages: canvas must be on top + clickable; prevent contenu masqué de bloquer le grattage */
+.scratch-card{ position: relative; }
+.scratch-card canvas{
+  z-index: 5;
+  pointer-events: auto;
+  touch-action: none; /* important mobile */
+}
+.scratch-card .bonus-inner{
+  position: relative;
+  z-index: 1;
+}
+.scratch-card:not(.is-revealed) .bonus-inner{
+  pointer-events: none; /* évite de “capturer” les clics au-dessus du canvas */
+}
+.scratch-card.is-revealed .bonus-inner{
+  pointer-events: auto;
+}
