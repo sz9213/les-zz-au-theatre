@@ -1,0 +1,326 @@
+/* Mini site Noël - Théâtre
+   Style simple, responsive, compatible GitHub Pages (sans build).
+*/
+:root{
+  --bg: #0b0f14;
+  --card: #121a24;
+  --card2: #0f1720;
+  --text: #e7edf7;
+  --muted: #a9b6c9;
+  --accent: #7dd3fc;
+  --accent2: #a78bfa;
+  --border: rgba(255,255,255,.10);
+  --shadow: 0 18px 45px rgba(0,0,0,.45);
+}
+
+*{ box-sizing: border-box; }
+html, body{ height:100%; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  /* Fond Noël : dégradés + “neige” légère en surcouche */
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(125,211,252,.20), transparent 60%),
+    radial-gradient(800px 500px at 85% 0%, rgba(167,139,250,.16), transparent 55%),
+    radial-gradient(900px 700px at 70% 95%, rgba(34,197,94,.10), transparent 55%),
+    radial-gradient(700px 520px at 10% 95%, rgba(239,68,68,.08), transparent 55%),
+    /* “neige” : points très discrets */
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.10) 0 2px, transparent 3px),
+    radial-gradient(circle at 40% 30%, rgba(255,255,255,.08) 0 1.8px, transparent 3px),
+    radial-gradient(circle at 70% 18%, rgba(255,255,255,.10) 0 2.2px, transparent 3px),
+    radial-gradient(circle at 85% 45%, rgba(255,255,255,.08) 0 1.6px, transparent 3px),
+    radial-gradient(circle at 25% 70%, rgba(255,255,255,.10) 0 2.1px, transparent 3px),
+    radial-gradient(circle at 55% 78%, rgba(255,255,255,.08) 0 1.7px, transparent 3px),
+    radial-gradient(circle at 88% 82%, rgba(255,255,255,.10) 0 2.0px, transparent 3px),
+    var(--bg);
+  background-size:
+    auto, auto, auto, auto,
+    220px 220px, 260px 260px, 240px 240px, 280px 280px, 250px 250px, 300px 300px, 270px 270px,
+    auto;
+  color:var(--text);
+}
+
+a{ color: inherit; text-decoration: none; }
+.container{ width:min(1100px, 92vw); margin-inline:auto; }
+
+.site-header{
+  padding: 48px 0 18px;
+  border-bottom: 1px solid var(--border);
+}
+h1{ margin: 0 0 8px; font-size: clamp(1.6rem, 2.6vw, 2.3rem); letter-spacing: .2px; }
+.subtitle{ margin: 0; color: var(--muted); }
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 26px 0 10px;
+}
+@media (max-width: 900px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.person-card{
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.person-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(125,211,252,.45);
+  background: linear-gradient(180deg, rgba(125,211,252,.10), rgba(255,255,255,.02));
+}
+
+.avatar{
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1/1;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.20);
+  align-self: center;
+  object-fit: cover;
+}
+.person-meta h2{
+  margin: 0;
+  font-size: 1.35rem;
+}
+.person-meta p{
+  margin: 3px 0 0;
+  color: var(--muted);
+}
+.cta{
+  margin-top: auto;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.note{
+  margin: 22px 0 40px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(18,26,36,.55);
+}
+.note h3{ margin: 0 0 8px; }
+.note ol{ margin: 0; color: var(--muted); }
+
+.site-footer{
+  border-top: 1px solid var(--border);
+  padding: 18px 0 26px;
+  color: var(--muted);
+}
+
+/* Pages personnes */
+.page-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 30px 0 10px;
+}
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(18,26,36,.55);
+}
+.back:hover{ border-color: rgba(125,211,252,.45); }
+
+.person-hero{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+.person-hero img{
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.20);
+  object-fit: cover;
+}
+.person-hero h2{ margin: 0; font-size: 1.35rem; }
+.person-hero p{ margin: 2px 0 0; color: var(--muted); }
+
+.plays{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 14px 0 50px;
+}
+@media (max-width: 900px){
+  .plays{ grid-template-columns: 1fr; }
+}
+
+.play-card{
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(18,26,36,.55);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction: column;
+}
+
+.play-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  /* liseré cadeau */
+  background:
+    linear-gradient(135deg, rgba(34,197,94,.16), transparent 35%),
+    linear-gradient(315deg, rgba(239,68,68,.12), transparent 40%);
+  mix-blend-mode: screen;
+}
+.play-thumb{
+  width: calc(100% - 40px);
+  aspect-ratio: 1 / 1;
+  max-width: 260px;        /* réduit fortement la taille */
+  margin: 18px auto 8px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.22);
+  object-fit: cover;
+  object-position: center;
+  display:block;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+.play-content{
+  padding: 14px 14px 16px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.play-title{
+  margin: 0;
+  font-size: 1.15rem;
+}
+.badges{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.badge{
+  font-size: .85rem;
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+}
+.play-desc{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.play-details{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+@media (min-width: 900px){
+  .play-thumb{
+  width: calc(100% - 40px);
+  aspect-ratio: 1 / 1;
+  max-width: 260px;        /* réduit fortement la taille */
+  margin: 18px auto 8px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.22);
+  object-fit: cover;
+  object-position: center;
+  display:block;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+}
+.play-actions{
+  margin-top: auto;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  font-weight: 600;
+}
+.btn:hover{ border-color: rgba(167,139,250,.45); }
+.small{
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+
+/* Effet carte cadeau */
+.play-card{
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.play-card:hover{
+  transform: translateY(-4px) rotate(-0.2deg);
+  box-shadow: 0 25px 60px rgba(0,0,0,.55);
+}
+.play-card:hover::before{
+  opacity: 1;
+}
+
+/* Liseré brillant */
+.play-card::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius: 24px;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.35),
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events:none;
+}
+.play-card:hover::after{
+  opacity: .6;
+}
+
+
+/* Neige légère */
+@keyframes snow {
+  from { transform: translateY(-10px); }
+  to   { transform: translateY(110vh); }
+}
+.snow{
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  z-index: 0;
+}
+.snow span{
+  position:absolute;
+  top:-10px;
+  width:4px;
+  height:4px;
+  background: rgba(255,255,255,.6);
+  border-radius:50%;
+  animation: snow linear infinite;
+}
